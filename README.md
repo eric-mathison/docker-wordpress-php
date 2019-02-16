@@ -1,4 +1,4 @@
-PHP Docker Image for use with Wordpress-NGINX Image
+PHP Docker Image for use with [Wordpress-NGINX Image](https://github.com/eric-mathison/docker-wordpress-nginx)
 
 ### PHP.ini Settings
 ```
