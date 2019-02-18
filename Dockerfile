@@ -72,6 +72,11 @@ RUN { \
 		echo 'opcache.enable_cli=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+RUN { \
+    echo 'pm.status_path = /status'; \
+    echo 'ping.path = /ping'; \
+  } > /usr/local/etc/php-fpm.d/metrics.conf
+
 COPY wordpress.ini /usr/local/etc/php/conf.d/wordpress.ini
 
 VOLUME /var/www/html
