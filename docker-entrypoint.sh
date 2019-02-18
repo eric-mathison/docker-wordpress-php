@@ -71,6 +71,15 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		fi
 		tar "${sourceTarArgs[@]}" . | tar "${targetTarArgs[@]}"
 		echo >&2 "Complete! WordPress has been successfully copied to $PWD"
+    
+    if [ ! -e wp-content/themes/mathisonmedia-child-theme/functions.php ] && [ ! -e wp-content/plugins/nginx-cache/nginx-cache.php ]; then
+      # if plugins have not already been copied, let's copy them now
+      echo >&2 "Mandatory Themes and Plugins not found - copying now..."
+      cp -Ruv /usr/src/plugins/* wp-content/plugins/
+      cp -Ruv /usr/src/themes/* wp-content/themes/
+      echo >&2 "Complete! Themes and Plugins have been successfully copied"
+    fi
+
 		if [ ! -e .htaccess ]; then
 			# NOTE: The "Indexes" option is disabled in the php:apache base image
 			cat > .htaccess <<-'EOF'
@@ -87,8 +96,6 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 			EOF
 			chown "$user:$group" .htaccess
 		fi
-    cp -Ru /usr/src/plugins/* wp-content/plugins/
-    cp -Ru /usr/src/themes/* wp-content/themes/
 	fi
 
 	# TODO handle WordPress upgrades magically in the same way, but only if wp-includes/version.php's $wp_version is less than /usr/src/wordpress/wp-includes/version.php's $wp_version
