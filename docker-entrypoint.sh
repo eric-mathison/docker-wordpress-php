@@ -75,8 +75,8 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
     if [ ! -e wp-content/themes/mathisonmedia-child-theme/functions.php ] && [ ! -e wp-content/plugins/nginx-cache/nginx-cache.php ]; then
       # if plugins have not already been copied, let's copy them now
       echo >&2 "Mandatory Themes and Plugins not found - copying now..."
-      cp -Ruv /usr/src/plugins/* wp-content/plugins/
-      cp -Ruv /usr/src/themes/* wp-content/themes/
+      cp -Ru /usr/src/plugins/* wp-content/plugins/
+      cp -Ru /usr/src/themes/* wp-content/themes/
       echo >&2 "Complete! Themes and Plugins have been successfully copied"
     fi
 
