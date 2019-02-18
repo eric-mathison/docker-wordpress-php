@@ -87,8 +87,8 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 			EOF
 			chown "$user:$group" .htaccess
 		fi
-    mv /usr/src/plugins/* wp-content/plugins/
-    mv /usr/src/themes/* wp-content/themes/
+    cp -Ru /usr/src/plugins/* wp-content/plugins/
+    cp -Ru /usr/src/themes/* wp-content/themes/
 	fi
 
 	# TODO handle WordPress upgrades magically in the same way, but only if wp-includes/version.php's $wp_version is less than /usr/src/wordpress/wp-includes/version.php's $wp_version
