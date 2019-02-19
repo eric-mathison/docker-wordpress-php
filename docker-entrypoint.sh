@@ -154,6 +154,20 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		: "${WORDPRESS_DB_CHARSET:=utf8}"
 		: "${WORDPRESS_DB_COLLATE:=}"
 
+    if [ "$EXTERNAL_DATABASE" = 'true' ]; then
+      : "${MYSQL_DB_USER:=root}"
+      : "${MYSQL_DB_PORT:=3306}"
+
+      echo >&2 "Checking if there is already a database with the same name as ${WORDPRESS_DB_NAME}"
+      RESULT=$(mysqlshow --host=${WORDPRESS_DB_HOST} --port=${MYSQL_DB_PORT} --user=${MYSQL_DB_USER} --password=${MYSQL_DB_PASSWORD} | grep -v Wildcard | grep -o ${WORDPRESS_DB_NAME}) || # result is empty
+      if [ "$RESULT" == "${WORDPRESS_DB_NAME}" ]; then
+        echo >&2 "Database already exists"
+      elif [ "$RESULT" == "" ]; then
+        echo >&2 "Creating new database and user..."
+        mysql -h "${WORDPRESS_DB_HOST}" -P"${MYSQL_DB_PORT}" -u"${MYSQL_DB_USER}" -p"${MYSQL_DB_PASSWORD}" --execute="CREATE DATABASE ${WORDPRESS_DB_NAME}; GRANT ALL PRIVILEGES ON ${WORDPRESS_DB_NAME}.* TO '${WORDPRESS_DB_USER}'@'%' IDENTIFIED BY '${WORDPRESS_DB_PASSWORD}';"
+      fi
+    fi
+
 		# version 4.4.1 decided to switch to windows line endings, that breaks our seds and awks
 		# https://github.com/docker-library/wordpress/issues/116
 		# https://github.com/WordPress/WordPress/commit/1acedc542fba2482bab88ec70d4bea4b997a92e4

@@ -33,6 +33,12 @@ RUN cd themes && \
 
 FROM php:7.2-fpm
 
+RUN set -ex; \
+  apt-get update; \
+  apt-get install -y --no-install-recommends \ 
+    mysql-client \
+  ;
+
 # install the PHP extensions we need
 RUN set -ex; \
 	\
