@@ -27,7 +27,7 @@ RUN cd plugins && \
 RUN mkdir themes
 RUN cd themes && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/astra.1.6.8.zip?raw=true && \
-  wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/mathisonmedia-child-theme.zip?raw=true && \
+  wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/astra-child-theme.zip?raw=true && \
   unzip -q "*.zip" && \
   rm *.zip
 
