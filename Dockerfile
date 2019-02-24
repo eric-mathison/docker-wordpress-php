@@ -12,6 +12,7 @@ RUN cd plugins && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/elementor-pro-2.4.4.zip?raw=true && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/ultimate-elementor.zip?raw=true && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/wp-schema-pro.zip?raw=true && \
+  wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/all-in-one-wp-migration-unlimited-extension.zip?raw=true && \
   wget https://downloads.wordpress.org/plugin/wp-mail-smtp.1.4.1.zip && \
   wget https://downloads.wordpress.org/plugin/wordpress-seo.9.6.zip && \
   wget https://downloads.wordpress.org/plugin/redirection.3.7.3.zip && \
@@ -21,6 +22,8 @@ RUN cd plugins && \
   wget https://downloads.wordpress.org/plugin/nginx-cache.1.0.4.zip && \
   wget https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.7.3.zip && \
   wget https://downloads.wordpress.org/plugin/autoptimize.2.4.4.zip && \
+  wget https://downloads.wordpress.org/plugin/custom-post-type-ui.1.6.1.zip && \
+  wget https://downloads.wordpress.org/plugin/all-in-one-wp-migration.6.85.zip && \
   unzip -q "*.zip" && \
   rm *.zip
 

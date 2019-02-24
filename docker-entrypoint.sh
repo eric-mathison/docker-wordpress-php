@@ -77,6 +77,8 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
       echo >&2 "Mandatory Themes and Plugins not found - copying now..."
       cp -Ru /usr/src/plugins/* wp-content/plugins/
       cp -Ru /usr/src/themes/* wp-content/themes/
+      chown -R "$user:$group" wp-content/plugins/
+      chown -R "$user:$group" wp-content/themes/
       echo >&2 "Complete! Themes and Plugins have been successfully copied"
     fi
 
