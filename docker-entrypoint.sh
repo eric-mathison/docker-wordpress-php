@@ -72,7 +72,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		tar "${sourceTarArgs[@]}" . | tar "${targetTarArgs[@]}"
 		echo >&2 "Complete! WordPress has been successfully copied to $PWD"
     
-    if [ ! -e wp-content/themes/mathisonmedia-child-theme/functions.php ] && [ ! -e wp-content/plugins/nginx-cache/nginx-cache.php ]; then
+    if [ ! -e wp-content/themes/astra-child-theme/functions.php ] && [ ! -e wp-content/plugins/nginx-cache/nginx-cache.php ]; then
       # if plugins have not already been copied, let's copy them now
       echo >&2 "Mandatory Themes and Plugins not found - copying now..."
       cp -Ru /usr/src/plugins/* wp-content/plugins/
