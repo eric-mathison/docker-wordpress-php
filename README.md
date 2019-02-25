@@ -43,6 +43,10 @@ services:
       - WORDPRESS_DB_HOST=mysql
       - WORDPRESS_DB_PASSWORD=wp_password
       - WORDPRESS_DB_USER=wp_user
+      - ENABLE_REDIS=false
+      - REDIS_HOST=localhost
+      - REDIS_PORT=6379
+      - REDIS_SALT=wordpress
     restart: always
 
   nginx:

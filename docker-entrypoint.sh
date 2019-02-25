@@ -259,6 +259,12 @@ EOPHP
 			set_config 'WP_DEBUG' 1 boolean
 		fi
 
+    if [ "$ENABLE_REDIS" = 'true' ]; then
+      set_config 'WP_REDIS_HOST' "$REDIS_HOST"
+      set_config 'WP_REDIS_PORT' "$REDIS_PORT"
+      set_config 'WP_CACHE_KEY_SALT' "$REDIS_SALT"
+    fi
+
 		TERM=dumb php -- <<'EOPHP'
 <?php
 // database might not exist, so let's try creating it (just to be safe)

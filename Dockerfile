@@ -40,7 +40,11 @@ RUN set -ex; \
   apt-get update; \
   apt-get install -y --no-install-recommends \ 
     mysql-client \
-  ;
+  ; \
+  \
+  pecl install redis \
+  docker-php-ext-enable redis \
+  \
 
 # install the PHP extensions we need
 RUN set -ex; \
@@ -90,8 +94,8 @@ COPY wordpress.ini /usr/local/etc/php/conf.d/wordpress.ini
 
 VOLUME /var/www/html
 
-ENV WORDPRESS_VERSION 5.0.3
-ENV WORDPRESS_SHA1 f9a4b482288b5be7a71e9f3dc9b5b0c1f881102b
+ENV WORDPRESS_VERSION 5.1
+ENV WORDPRESS_SHA1 a2a9a0226613668a14475e6e33644a2c8ad131ca
 
 RUN set -ex; \
 	curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
