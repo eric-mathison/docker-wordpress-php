@@ -184,6 +184,12 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 						print "// WORDPRESS_CONFIG_EXTRA"
 						print ENVIRON["WORDPRESS_CONFIG_EXTRA"] "\n"
 					}
+          if (ENVIRON["REDIS_HOST"]) {
+            print "// REDIS_CONFIG"
+            print "define( " "\x27" "WP_REDIS_HOST" "\x27" ", " "\x27" ENVIRON["REDIS_HOST"] "\x27" " );"
+            print "define( " "\x27" "WP_REDIS_PORT" "\x27" ", " "\x27" ENVIRON["REDIS_PORT"] "\x27" " );"
+            print "define( " "\x27" "WP_CACHE_KEY_SALT" "\x27" ", " "\x27" ENVIRON["REDIS_SALT"] "\x27" " ); \n"
+          }
 				}
 				{ print }
 			' wp-config-sample.php > wp-config.php <<'EOPHP'
@@ -244,10 +250,10 @@ EOPHP
 				set_config "$unique" "${!uniqVar}"
 			else
 				# if not specified, let's generate a random value
-				currentVal="$(sed -rn -e "s/define\((([\'\"])$unique\2\s*,\s*)(['\"])(.*)\3\);/\4/p" wp-config.php)"
+				currentVal="$(sed -rn -e "s/define\(\s*[\']$unique[\'],\s*[\'](.*)[\']\s*\);/\1/p" wp-config.php)"
 				if [ "$currentVal" = 'put your unique phrase here' ]; then
 					set_config "$unique" "$(head -c1m /dev/urandom | sha1sum | cut -d' ' -f1)"
-				fi
+        fi
 			fi
 		done
 
@@ -258,12 +264,6 @@ EOPHP
 		if [ "$WORDPRESS_DEBUG" ]; then
 			set_config 'WP_DEBUG' 1 boolean
 		fi
-
-    if [ "$ENABLE_REDIS" = 'true' ]; then
-      set_config 'WP_REDIS_HOST' "$REDIS_HOST"
-      set_config 'WP_REDIS_PORT' "$REDIS_PORT"
-      set_config 'WP_CACHE_KEY_SALT' "$REDIS_SALT"
-    fi
 
 		TERM=dumb php -- <<'EOPHP'
 <?php

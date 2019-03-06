@@ -43,7 +43,8 @@ RUN set -ex; \
   ; \
   \
   pecl install redis \
-  docker-php-ext-enable redis 
+  && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
+  && docker-php-ext-enable redis 
 
 # install the PHP extensions we need
 RUN set -ex; \
