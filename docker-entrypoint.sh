@@ -190,6 +190,8 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
             print "define( " "\x27" "WP_REDIS_PORT" "\x27" ", " "\x27" ENVIRON["REDIS_PORT"] "\x27" " );"
             print "define( " "\x27" "WP_CACHE_KEY_SALT" "\x27" ", " "\x27" ENVIRON["REDIS_SALT"] "\x27" " ); \n"
           }
+          print "// LIMIT_WP_REVISIONS"
+          print "define( " "\x27" "WP_POST_REVISIONS" "\x27" ", 3); \n"
 				}
 				{ print }
 			' wp-config-sample.php > wp-config.php <<'EOPHP'
