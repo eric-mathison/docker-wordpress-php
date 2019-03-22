@@ -8,19 +8,16 @@ RUN mkdir plugins
 RUN cd plugins && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/advanced-custom-fields-pro.zip?raw=true && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/astra-addon-plugin-1.6.13.zip?raw=true && \
-  wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/astra-premium-sites-2.zip?raw=true && \
   wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/elementor-pro-2.4.4.zip?raw=true && \
-  wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/ultimate-elementor.zip?raw=true && \
-  wget --content-disposition https://github.com/eric-mathison/docker-wordpress-php/blob/master/files/wp-schema-pro.zip?raw=true && \
   wget https://downloads.wordpress.org/plugin/wp-mail-smtp.1.4.1.zip && \
-  wget https://downloads.wordpress.org/plugin/wordpress-seo.9.6.zip && \
+  wget https://downloads.wordpress.org/plugin/wordpress-seo.10.0.1.zip && \
   wget https://downloads.wordpress.org/plugin/redirection.3.7.3.zip && \
-  wget https://downloads.wordpress.org/plugin/ultimate-addons-for-gutenberg.1.9.0.zip && \
-  wget https://downloads.wordpress.org/plugin/elementor.2.4.6.zip && \
+  wget https://downloads.wordpress.org/plugin/elementor.zip && \
   wget https://downloads.wordpress.org/plugin/redis-cache.1.4.1.zip && \
   wget https://downloads.wordpress.org/plugin/nginx-cache.1.0.4.zip && \
   wget https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.7.3.zip && \
   wget https://downloads.wordpress.org/plugin/autoptimize.2.4.4.zip && \
+  wget https://downloads.wordpress.org/plugin/updraftplus.1.16.8.zip && \
   wget https://downloads.wordpress.org/plugin/custom-post-type-ui.1.6.1.zip && \
   unzip -q "*.zip" && \
   rm *.zip
@@ -92,8 +89,8 @@ COPY wordpress.ini /usr/local/etc/php/conf.d/wordpress.ini
 
 VOLUME /var/www/html
 
-ENV WORDPRESS_VERSION 5.1
-ENV WORDPRESS_SHA1 830eadf0afa15928d7f6856b1b85bf57b8e1f585
+ENV WORDPRESS_VERSION 5.1.1
+ENV WORDPRESS_SHA1 f1bff89cc360bf5ef7086594e8a9b68b4cbf2192
 
 RUN set -ex; \
 	curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
