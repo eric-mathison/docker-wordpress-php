@@ -1,71 +1,34 @@
-PHP Docker Image for use with [Wordpress-NGINX Image](https://github.com/eric-mathison/docker-wordpress-nginx)
+# Wordpress PHP-FPM with Redis Support - Docker Image
+
+Based off the official Wordpress PHP-FPM Docker image
 
 ### PHP.ini Settings
+
 ```
-memory_limit =512M
+memory_limit = 512M
 upload_max_filesize = 200M
 post_max_size = 200M
-max_execution_time = 500
-max_input_time = 500
+max_execution_time = 600
+max_input_time = 600
 ```
 
-docker-compose example:
+### Docker Compose example:
+
 ```
-version: "3"
-services: 
-  db:
-    image: mariadb:10.3
-    container_name: mysql
-    ports: 
-      - '3306:3306'
-    volumes: 
-      - db_data:/var/lib/mysql
-    environment: 
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=wp_user
-      - MYSQL_PASSWORD=wp_password
-      - MYSQL_DATABASE=wordpress
-    restart: always
-  
+version: "3.3"
+services:
   wordpress:
-    image: ericmathison/wordpress-php:latest
-    container_name: wordpress
-    depends_on:
-      - db
-    ports: 
-      - '9000:9000'
+    image: ericmathison/wordpress:5.6-fpm-redis
     volumes:
-      - wp_data:/var/www/html
-      - wp_cache:/var/cache/nginxfastcgi
-    environment: 
-      - WORDPRESS_DB_NAME=wordpress
-      - WORDPRESS_TABLE_PREFIX=wp_
-      - WORDPRESS_DB_HOST=mysql
-      - WORDPRESS_DB_PASSWORD=wp_password
-      - WORDPRESS_DB_USER=wp_user
-      - ENABLE_REDIS=false
-      - REDIS_HOST=localhost
-      - REDIS_PORT=6379
-      - REDIS_SALT=wordpress
+      - wp-data:/var/www/html
+    environment:
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_HOST: localhost
+      WORDPRESS_DB_PASSWORD: wp_password
+      WORDPRESS_DB_USER: wp_user
+      ENABLE_REDIS: false
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_SALT: wordpress
     restart: always
-
-  nginx:
-    image: ericmathison/wordpress-nginx:latest
-    container_name: nginx
-    ports:
-      - '80:80'
-    volumes:
-      - wp_data:/var/www/html
-      - wp_cache:/var/cache/nginxfastcgi
-    depends_on: 
-      - wordpress
-    restart: always
-
-volumes:
-  db_data:
-    driver: local
-  wp_data:
-    driver: local
-  wp_cache:
-    driver: local
 ```
