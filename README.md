@@ -18,17 +18,17 @@ max_input_time = 600
 version: "3.3"
 services:
   wordpress:
-    image: ericmathison/wordpress:5.6-fpm-redis
+    image: ericmathison/wordpress:latest
     volumes:
       - wp-data:/var/www/html
     environment:
-      WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_HOST: localhost
       WORDPRESS_DB_PASSWORD: wp_password
       WORDPRESS_DB_USER: wp_user
-      ENABLE_REDIS: false
       REDIS_HOST: localhost
-      REDIS_PORT: 6379
-      REDIS_SALT: wordpress
+      MAX_CHILDREN: 5
+      START_SERVERS: 2
+      MIN_SPARES: 1
+      MAX_SPARES: 3
     restart: always
 ```
