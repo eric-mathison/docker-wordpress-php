@@ -5,6 +5,8 @@ sed -i "s/pm.max_children = 5/pm.max_children = $MAX_CHILDREN/" /usr/local/etc/p
 sed -i "s/pm.start_servers = 2/pm.start_servers = $START_SERVERS/" /usr/local/etc/php-fpm.d/www.conf
 sed -i "s/pm.min_spare_servers = 1/pm.min_spare_servers = $MIN_SPARES/" /usr/local/etc/php-fpm.d/www.conf
 sed -i "s/pm.max_spare_servers = 3/pm.max_spare_servers = $MAX_SPARES/" /usr/local/etc/php-fpm.d/www.conf
+sed -i "s/;pm.max_requests = 500/pm.max_requests = 500/" /usr/local/etc/php-fpm.d/www.conf
+sed -i "s/;pm.process_idle_timeout = 10s;/pm.process_idle_timeout = 10s;/" /usr/local/etc/php-fpm.d/www.conf
 
 # usage: file_env VAR [DEFAULT]
 #    ie: file_env 'XYZ_DB_PASSWORD' 'example'
