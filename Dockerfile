@@ -5,6 +5,11 @@ RUN set -ex; \
     && echo "extenstion=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && docker-php-ext-enable redis
 
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp \
+    && rm -rf /usr/local/share/wp-cli/
+
 RUN { \
     echo 'pm.status_path = /status'; \
     echo 'ping.path = /ping'; \

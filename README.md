@@ -1,8 +1,8 @@
-# Wordpress PHP-FPM Docker Image with Redis Support
+# Wordpress PHP-FPM Docker Image with Redis Support and WP CLI
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/eric-mathison/docker-wordpress-php/Build%20Docker%20Image%20and%20Push?style=for-the-badge)
 
-This is a Wordpress PHP-FPM Docker Image designed to work with this [NGINX Docker Image](https://github.com/eric-mathison/docker-wordpress-nginx). This image also includes support for Redis caching.
+This is a Wordpress PHP-FPM Docker Image designed to work with this [NGINX Docker Image](https://github.com/eric-mathison/docker-wordpress-nginx). This image also includes support for Redis caching and WP CLI.
 
 ## How to Use this Image
 
