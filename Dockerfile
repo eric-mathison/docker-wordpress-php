@@ -1,4 +1,4 @@
-FROM wordpress:6.3-fpm
+FROM wordpress:6.7-fpm
 
 RUN set -ex; \
     pecl install redis \
