@@ -1,10 +1,5 @@
 FROM wordpress:6.7-fpm
 
-RUN set -ex; \
-    pecl install redis \
-    && echo "extenstion=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
-    && docker-php-ext-enable redis
-
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp \

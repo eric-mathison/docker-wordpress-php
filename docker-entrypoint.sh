@@ -234,10 +234,6 @@ EOPHP
 			set_config 'WP_DEBUG' 1 boolean
 		fi
 
-		if ! grep -q "WP_REDIS_HOST" wp-config.php; then
-			sed -ri "/\*.*stop editing.*/i define('WP_REDIS_HOST', '${REDIS_HOST-}');\ndefine('WP_REDIS_PORT', '6379');\ndefine('WP_REDIS_TIMEOUT', '1');\ndefine('WP_REDIS_READ_TIMEOUT', '1');" wp-config.php
-		fi
-
 		if ! TERM=dumb php -- <<'EOPHP'
 <?php
 // database might not exist, so let's try creating it (just to be safe)
